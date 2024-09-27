@@ -1,7 +1,10 @@
 FROM python:3.10-alpine
-COPY . /app
-WORKDIR /app
+
+WORKDIR /
 
 RUN pip install --no-cache-dir -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["hello.py"]
+
+COPY . .
+EXPOSE 5000
+
+CMD ["flask", "--app", "hello", "run", "--host=0.0.0.0", "--port=5000"]
